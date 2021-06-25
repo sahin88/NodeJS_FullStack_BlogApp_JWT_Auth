@@ -57,14 +57,6 @@ After installing node, this project will need yarn too, so just run the followin
     $ cd node_js_blog
     $ npm  install .
 
-## Configure app
-
-Open `a/nice/path/to/a.file` then edit it with your settings. You will need:
-
-- A setting;
-- Another setting;
-- One more setting;
-
 ## Running the project
 
     $ npm start
