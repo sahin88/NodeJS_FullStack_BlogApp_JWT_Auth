@@ -6,7 +6,7 @@ User can create accounts and create post
 
 ## Basic View
 
-![alt text](https://github.com/sahin88/node_js_blog/node_js_blog.png)
+![alt text](https://github.com/sahin88/node_js_blog/blob/main/node_js_blog.png)
 
 ## Requirements
 
