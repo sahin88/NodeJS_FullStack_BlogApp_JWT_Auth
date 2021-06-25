@@ -1,5 +1,4 @@
 const User =require('../model/user.js');
-
 const bcrypt=require('bcrypt');
 const jwt= require('jsonwebtoken');
 const { paginatedResult } = require('./blogController.js');
@@ -24,10 +23,7 @@ const register=(req, res)=>{
     if(error){
         console.log("error",error.details[0].message)
         var message=error.details[0].message.replace(/['"]+/g, '')
-    
-     
-       
-        console.log("message",new_message)
+
         return res.render('register.ejs',{title:'Blog | Register', message:messageg})
     }
    
@@ -38,7 +34,7 @@ const register=(req, res)=>{
             phone:req.body.phone,
             password:hashedPassword
         })
-        console.log("user", user)
+
         user.save().then((response)=>{ res.redirect('/login')}).catch((err)=>{console.log("err", err)})
 
         });

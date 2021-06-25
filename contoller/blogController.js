@@ -12,18 +12,11 @@ const blog_paginated_index=(req, res)=>{
 }
 
 const blog_index=(req, res)=>{
-    console.log(
-        'activate_page', activate_page )
     Blog.find().sort({createdAt:-1})
-    .then((result) => {
-        
-        res.render('index.ejs',{title:'All-Blogs | Blog',blogs:result});
-
-    })
+    .then((result) => { res.render('index.ejs',{title:'All-Blogs | Blog',blogs:result});})
     .catch((err)=>{console.log("err",err)})
 
 }
-
 const blog_create =(req,res)=>{
     console.log("req.bof", req.formdata)
         const blog= new Blog(req.body)
@@ -50,9 +43,8 @@ const blog_find_by_id=(req,res)=>{
 }
 
 const blog_delete_by_id=(req,res)=>{
-    const id = req.params.id
-  
-    Blog.findByIdAndDelete(id).then((result)=>{res.json({redirect:'/blog/blog?page=1&limit=2'})}).catch((error)=>{console.log("errrrrr", error)})
+    const id = req.params.id 
+    Blog.findByIdAndDelete(id).then((result)=>{res.json({redirect:'/blog/blog?page=1&limit=2'})}).catch((error)=>{console.log("error", error)})
 }
 
 
@@ -60,7 +52,6 @@ const blog_delete_by_id=(req,res)=>{
 async function getPostLength(posts){
 var length_of_db=null
 await posts.find().then((response)=>{return  length_of_db=response.length}).catch((err)=>{console.log("err",err)})
-
 return length_of_db
 
 }
@@ -69,12 +60,10 @@ function iteratePageRange(page, limit, whole_pages){
     var end_iterate=null;
     if(page-limit<=1){
         start_iterate=1
-
     }
     else{
         start_iterate=page-limit
     }
-
     var max_page=Math.ceil(whole_pages/limit);
 
     if(page+limit>max_page){
@@ -93,11 +82,7 @@ function paginatedResult(posts){
     return async (req, res, next)=>{
         const limit=parseInt(req.query.limit);
         const page=parseInt(req.query.page);
-        var token=null
-        
-      
-        
-        
+        var token=null    
         const startIndex=(page-1)*limit
         const lastIndex=page*limit
         const result={};
@@ -108,25 +93,21 @@ function paginatedResult(posts){
              token=req.query.token;
             console.log("token from pagination fucntuon", token)
            
-        } catch (error) {
-            
+        } catch (error) {   
         }
         console.log("posts_length",startIndex)
         if(lastIndex<whole_pages){
             result.next={
                 page:page+1,
                 limit:limit,
-            }
-    
-        }
-    
+            }   
+        }  
         if(startIndex>0)
         {
             result.previous={
                 page:page-1,
                 limit:limit
-            }
-    
+            }   
         }
         let response=iteratePageRange(page,limit,whole_pages);
         result.active_page=page
@@ -140,11 +121,7 @@ function paginatedResult(posts){
             result.token=token
 
         }
-      
-        
         res.paginatedResult=result;
-      
-
         next()
         
       
@@ -152,14 +129,12 @@ function paginatedResult(posts){
 
 }
 module.exports={
-    blog_index
-    ,blog_create,
+    blog_index,
+    blog_create,
     blog_find_by_id,
     blog_delete_by_id,
     blog_paginated_index,
-    paginatedResult,
-    
-    
+    paginatedResult,   
 }
 
  

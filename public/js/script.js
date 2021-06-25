@@ -12,7 +12,6 @@ try {
         responsive_division.classList.add('forward');
         }
     else{
-
         responsive_division.classList.remove('forward');
         responsive_division.classList.add('backing');
         responsive_division.style.animation='navbar_animation_back'
@@ -36,8 +35,7 @@ function visitPage(page){
  
  }
  function updatePagination(activate_page){
-     console.log("to understand the logic")
- // remove child element 
+
      division_button.innerHTML=''
  
      for(let i=activate_page; i<activate_page+10; i++){
@@ -81,14 +79,8 @@ function visitPage(page){
  
  
  
-    
-} catch (error) {
-    
-}
 
-async function denemeFunc(params){
-    console.log("params", params)
-}
+
 
 
 
