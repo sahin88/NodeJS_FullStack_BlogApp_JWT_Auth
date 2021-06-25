@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+    
+   
+            <form class="division-section-form" action="/user/register", method="POST">
+                <div class="division-section-form-inner">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id ='email' name='email' placeholder="Email">
+                </div>
+                <div class="form-group"> 
+                    <label for="username">Username</label>
+                    <input type="text" id ='username' name='name' placeholder="Password">
+
+                </div>
+                <div class="form-group"> 
+                    <label for="phone">phone</label>
+                    <input type="text" id ='phone' name='phone' placeholder="Phone">
+                </div>
+                <div class="form-group"> 
+                    <label for="password">Password</label>
+                    <input type="text" id ='password' name='password' placeholder="Password">
+
+                </div>
+             
+                <div class="form-group"> 
+                    <label for="re_password">Re-Password</label>
+                    <input type="text" id ='re_password' name='re_password' placeholder="Re-Password">
+
+                </div>
+
+                <div class="form-group"> 
+                    <input type="submit" value="Send">
+                </div>
+                <input type="hidden" name="error" id='error_id' class="error_variable" value="<%= message %>">
+            </div>
+            </form>
+
+<script  type="text/javascript">
+   eror_message=document.getElementsByClassName('error_variable');
+   input_hidden=document.getElementById('error_id')
+   console.log(eror_message,'adlarini söyle',input_hidden,input_hidden.value)
+   if(input_hidden.value){
+       alert(input_hidden.value)
+   }
+</script>
+</body>
+
+</html>

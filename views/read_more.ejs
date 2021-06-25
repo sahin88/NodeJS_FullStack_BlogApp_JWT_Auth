@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="division-section">
+        
+     
+                <div class="blog-card" >
+                <h3 class="blog-card-h3"><%= blog.title %></h3>
+                <p class="blog-card-p"><%= blog.content %></p>
+            <div class="blog-card-date-readmore">
+                <p class="blog-card-p-date"><strong>Created at : </strong><%= new Date(blog.createdAt).toUTCString() %></p>
+            
+            </div>
+            </div>
+   
+    </div>
+  
+ 
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="division-section">
+        
+        <% if (blogs.length>0) { %>
+            <% blogs.forEach(blog=>{%>
+                <div class="blog-card" >
+                <h3 class="blog-card-h3"><%= blog.title %></h3>
+                <p class="blog-card-p"><%= blog.content %></p>
+            <div class="blog-card-date-readmore">
+                <p class="blog-card-p-date"><strong>Created at :<br> </strong><%= new Date(blog.createdAt).toUTCString() %></p>
+                <a  class="blog-card-date-delete_anker" data-doc= "<%=  blog.id %>">Delete</a>
+                <a href='/blog/<%= blog.id %>' class="blog-card-date-readmore_anker">Read More</a>
+            </div>
+            </div>
+            <%})%>
+     
+        <% } %>
+    </div>
+    <div class="division-button">
+
+
+    </div>
+ 
+</body>
+
+
+
+
+<script>
+    
+    const click_anker_delete=document.querySelector('.blog-card-date-delete_anker');
+  
+    click_anker_delete.addEventListener('click',(e)=>{
+       
+        const endpoint=`/blog/delete/${click_anker_delete.dataset.doc}`;
+
+        fetch(endpoint, {method:'DELETE'}).then((response)=>{(response.json().then((data)=>{window.location.href=data.redirect}))}).catch((error)=>{alert(error)})
+        .catch((error)=>{console.log(error)})
+    })
+</script>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="division-section">
+        
+        <% if (blogs.result.length>0) { %>
+            <% blogs.result.forEach(blog=>{%>
+                <div class="blog-card" >
+                    <h3 class="blog-card-h3"><%= blog.title %></h3>
+                    <p class="blog-card-p"><%= blog.content %></p>
+                <div class="blog-card-date-readmore">
+                    <p class="blog-card-p-date"><strong>Created at :<br> </strong><%= new Date(blog.createdAt).toUTCString() %></p>
+                    <a  class="blog-card-date-delete_anker" data-doc= "<%=  blog.id %>">Delete</a>
+                    <a href='/blog/<%= blog.id %>' class="blog-card-date-readmore_anker">Read More</a>
+                </div>
+                </div>
+                <%})%>
+         
+            <% } %>
+        </div>
+    <div class="division-button-deneme">
+        <input type="hidden" name="error" id='token_variable' value="<%= blogs.token %>">
+        <% if (blogs.previous) { %>
+         
+            
+            <input value='Previous' type='button'   name='previous' class="pagination_button" data-doc= "<%=  blogs.previous.page %>" >
+    
+
+            <%}%>
+
+            <% for(var i= blogs.start_iterate; i < blogs.end_iterate; i++) { %>
+             
+                <% if(blogs.active_page == i) {%>
+                    <input value="<%= i %>" type='button'   name="<%= i %>" class="pagination_button active" data-doc= "<%= i %>" >
+                <%}
+                else {%>
+                    <input value="<%= i %>" type='button'   name="<%= i %>" class="pagination_button" data-doc= "<%= i %>" >
+                    <%}%>
+                <%} %>             
+            <% if (blogs.next) { %>
+         
+            
+                <input value='Next' type='button'   name='previous' class="pagination_button"  data-doc= "<%=  blogs.next.page %>"   >
+    
+                <%}%>
+    </div>
+    <script>
+        try {
+            const click_anker_delete=document.querySelector('.blog-card-date-delete_anker');
+  
+            click_anker_delete.addEventListener('click',(e)=>{
+                console.log("click_anker_delete.dataset.doc",click_anker_delete.dataset.doc)
+
+            const endpoint=`/blog/delete/${click_anker_delete.dataset.doc}`;
+
+            fetch(endpoint, {method:'DELETE'}).then((response)=>{(response.json().then((data)=>{window.location.href=data.redirect}))}).catch((error)=>{alert(error)})
+            .catch((error)=>{console.log(error)})
+            })
+
+            
+        } catch (error) {
+            
+        }
+
+
+
+        const input_button= document.getElementsByClassName('pagination_button');
+       
+        for(let i=0;i<input_button.length; i++){
+      
+            input_button[i].addEventListener('click',(event)=>{
+                const entpoint=`/blog/blog?page=${event.target.dataset.doc}&limit=2`;
+                fetch(entpoint,{METHOD:'GET'}).then((response)=>{ window.location.href=response.url}).catch((err)=>{console-log("error")});
+            })
+        }
+
+        token_variable=document.getElementById('token_variable')
+        console.log('adlarini söyle',token_variable,token_variable.value)
+        if(token_variable.value){
+            localStorage.setItem('accesstoken',token_variable.value)
+            
+        }
+       
+
+    </script>
+
+
+ 
+</body>
+
+
+
+
+</html>
