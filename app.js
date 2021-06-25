@@ -14,8 +14,6 @@ const userRoouter=require('./routes/userRoutes.js')
 
 
 
-// connect to Database
-// mongodb+srv://sahin_88:sahinAa1!@cluster0.r53by.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 const dbURI=process.env.DB_CONNET;
 mongoose.connect(dbURI,{useNewUrlParser:true,useUnifiedTopology:true}).then((result)=>{console.log("connected succesfully")}).catch((err)=>{
     console.log("errror_mongoose", err)
